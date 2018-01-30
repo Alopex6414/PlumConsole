@@ -20,6 +20,7 @@
 
 //Include C/C++ Run Header File
 #include <stdio.h>
+#include <stdarg.h>
 
 //Macro Definition
 #ifdef	PLUMCONSOLE_EXPORTS
@@ -103,6 +104,11 @@ public:
 	virtual void PlumConsoleWriteLineInt(int nNumber, WORD wTextColor, bool bIsUnderLine = false);								//PlumConsole Write~(输出Console)<输出文本到控制台>
 	virtual void PlumConsoleWriteLineFloat(float fNumber, WORD wTextColor, bool bIsUnderLine = false);							//PlumConsole Write~(输出Console)<输出文本到控制台>
 	virtual void PlumConsoleWriteLineDouble(double dNumber, WORD wTextColor, bool bIsUnderLine = false);						//PlumConsole Write~(输出Console)<输出文本到控制台>
+
+	virtual void PlumConsoleWriteNormal(LPCSTR lpcstr, ...);									//PlumConsole Write~(输出Console)<输出文本到控制台><标准模式>
+	virtual void PlumConsoleWriteLineNormal(LPCSTR lpcstr, ...);								//PlumConsole Write~(输出Console)<输出文本到控制台><标准模式>
+	virtual void PlumConsoleWriteRepeat(int Y, LPCSTR lpcstr, ...);								//PlumConsole Write~(输出Console)<输出文本到控制台><重复模式>
+	virtual void PlumConsoleWriteLineRepeat(int Y, LPCSTR lpcstr, ...);							//PlumConsole Write~(输出Console)<输出文本到控制台><重复模式>
 
 	virtual void PlumConsoleWriteA(const void* lpcszStr);										//PlumConsole Write~(输出Console)<输出文本到控制台>
 	virtual void PlumConsoleWriteA(const void* lpcszStr, int nSize);							//PlumConsole Write~(输出Console)<输出文本到控制台>

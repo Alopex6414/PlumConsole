@@ -13,6 +13,7 @@
 #include "PlumConsole.h"
 
 //This Class is Use for Console Debug(控制台调试)
+#pragma warning(disable: 4996)
 
 //------------------------------------------------------------------
 // @Function:	 CPlumConsole()
@@ -589,6 +590,110 @@ void CPlumConsole::PlumConsoleWriteLineDouble(double dNumber, WORD wTextColor, b
 {
 	PlumConsoleWriteDouble(dNumber, wTextColor, bIsUnderLine);
 	PlumConsoleWrite("\n");
+}
+
+//---------------------------------------------------------------------------------------
+// @Function:	 PlumConsoleWriteNormal(LPCSTR lpcstr, ...)
+// @Purpose: CPlumConsole控制台输出
+// @Since: v1.00a
+// @Para: const void* lpcszStr			//字符串地址
+// @Para: ...
+// @Return: None
+//---------------------------------------------------------------------------------------
+void CPlumConsole::PlumConsoleWriteNormal(LPCSTR lpcstr, ...)
+{
+	va_list arg_ptr;
+	char WriteArr[MAX_PATH];
+	DWORD dwWriteCount;
+
+	va_start(arg_ptr, lpcstr);
+	memset(WriteArr, 0, sizeof(WriteArr));
+	_vsnprintf(WriteArr, sizeof(WriteArr), lpcstr, arg_ptr);
+	va_end(arg_ptr);
+
+	WriteConsoleA(m_hConsole, WriteArr, strlen((const char*)WriteArr), &dwWriteCount, NULL);
+}
+
+//---------------------------------------------------------------------------------------
+// @Function:	 PlumConsoleWriteLineNormal(LPCSTR lpcstr, ...)
+// @Purpose: CPlumConsole控制台输出
+// @Since: v1.00a
+// @Para: const void* lpcszStr			//字符串地址
+// @Para: ...
+// @Return: None
+//---------------------------------------------------------------------------------------
+void CPlumConsole::PlumConsoleWriteLineNormal(LPCSTR lpcstr, ...)
+{
+	va_list arg_ptr;
+	char WriteArr[MAX_PATH];
+	DWORD dwWriteCount;
+
+	va_start(arg_ptr, lpcstr);
+	memset(WriteArr, 0, sizeof(WriteArr));
+	_vsnprintf(WriteArr, sizeof(WriteArr), lpcstr, arg_ptr);
+	va_end(arg_ptr);
+
+	WriteConsoleA(m_hConsole, WriteArr, strlen((const char*)WriteArr), &dwWriteCount, NULL);
+	WriteConsoleA(m_hConsole, "\n", strlen("\n"), &dwWriteCount, NULL);
+}
+
+//---------------------------------------------------------------------------------------
+// @Function:	 PlumConsoleWriteNormal(LPCSTR lpcstr, ...)
+// @Purpose: CPlumConsole控制台输出
+// @Since: v1.00a
+// @Para: const void* lpcszStr			//字符串地址
+// @Para: ...
+// @Return: None
+//---------------------------------------------------------------------------------------
+void CPlumConsole::PlumConsoleWriteRepeat(int Y, LPCSTR lpcstr, ...)
+{
+	va_list arg_ptr;
+	char WriteArr[MAX_PATH];
+	COORD Coord;
+	DWORD dwWriteCount;
+
+	Coord.X = 0;
+	Coord.Y = Y;
+
+	PlumConsoleClearLine(Y);	//清除行
+	SetConsoleCursorPosition(m_hConsole, Coord);	//设置坐标
+
+	va_start(arg_ptr, lpcstr);
+	memset(WriteArr, 0, sizeof(WriteArr));
+	_vsnprintf(WriteArr, sizeof(WriteArr), lpcstr, arg_ptr);
+	va_end(arg_ptr);
+
+	WriteConsoleA(m_hConsole, WriteArr, strlen((const char*)WriteArr), &dwWriteCount, NULL);
+}
+
+//---------------------------------------------------------------------------------------
+// @Function:	 PlumConsoleWriteNormal(LPCSTR lpcstr, ...)
+// @Purpose: CPlumConsole控制台输出
+// @Since: v1.00a
+// @Para: const void* lpcszStr			//字符串地址
+// @Para: ...
+// @Return: None
+//---------------------------------------------------------------------------------------
+void CPlumConsole::PlumConsoleWriteLineRepeat(int Y, LPCSTR lpcstr, ...)
+{
+	va_list arg_ptr;
+	char WriteArr[MAX_PATH];
+	COORD Coord;
+	DWORD dwWriteCount;
+
+	Coord.X = 0;
+	Coord.Y = Y;
+
+	PlumConsoleClearLine(Y);	//清除行
+	SetConsoleCursorPosition(m_hConsole, Coord);	//设置坐标
+
+	va_start(arg_ptr, lpcstr);
+	memset(WriteArr, 0, sizeof(WriteArr));
+	_vsnprintf(WriteArr, sizeof(WriteArr), lpcstr, arg_ptr);
+	va_end(arg_ptr);
+
+	WriteConsoleA(m_hConsole, WriteArr, strlen((const char*)WriteArr), &dwWriteCount, NULL);
+	WriteConsoleA(m_hConsole, "\n", strlen("\n"), &dwWriteCount, NULL);
 }
 
 //-----------------------------------------------------------------------
