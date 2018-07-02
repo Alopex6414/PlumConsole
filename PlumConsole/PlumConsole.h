@@ -7,20 +7,17 @@
 * @brief	This Program is PlumConsole DLL Project.
 * @notes	Console控制台调试
 * @author	Alopex/Helium
-* @version	v1.00a
+* @version	v1.02a
 * @date		2017-12-23	v1.00a	alopex	Create Project.
+* @date		2018-07-02	v1.02a	alopex	Add Common Header File.
 */
 #pragma once
 
 #ifndef __PLUMCONSOLE_H_
 #define __PLUMCONSOLE_H_
 
-//Include Windows Header File
-#include <Windows.h>
-
-//Include C/C++ Run Header File
-#include <stdio.h>
-#include <stdarg.h>
+//Include Plum Common Header File
+#include "PlumCommon.h"
 
 //Macro Definition
 #ifdef	PLUMCONSOLE_EXPORTS
@@ -28,6 +25,8 @@
 #else
 #define PLUMCONSOLE_API	__declspec(dllimport)
 #endif
+
+#define PLUMCONSOLE_CALLMODE	__stdcall
 
 //About Console Output Color
 #define CONSOLE_TEXTCOLOR_BRIGHTNESS_RED	(WORD)(FOREGROUND_RED	| FOREGROUND_INTENSITY)
@@ -52,7 +51,6 @@ class PLUMCONSOLE_API CPlumConsole
 private:
 	HANDLE m_hConsole;							//Console Handle 控制台句柄
 	CONSOLE_SCREEN_BUFFER_INFO m_sConsoleInfo;	//Console Infomation 控制台信息
-
 
 public:
 	CPlumConsole();								//PlumConsole 构造函数
