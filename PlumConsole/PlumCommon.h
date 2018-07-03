@@ -7,8 +7,9 @@
 * @brief	This Program is PlumCommon Plum Common Header File.
 * @notes	Plum Common Header File
 * @author	alopex
-* @version	v1.00a
+* @version	v1.01a
 * @date		2018-07-02	v1.00a	alopex	Create Project.
+* @date		2018-07-03	v1.01a	alopex	Add Shlwapi Library.
 */
 #pragma once
 
@@ -17,6 +18,7 @@
 
 //Include Windows Header File
 #include <Windows.h>
+#include <Shlwapi.h>
 
 //Include C/C++ Header File
 #include <stdio.h>
@@ -42,6 +44,7 @@
 #include <map>
 
 //Include C/C++ Library
+#pragma comment(lib, "Shlwapi.lib")
 
 
 #endif

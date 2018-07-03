@@ -7,10 +7,11 @@
 * @brief	This Program is PlumConsole DLL Project.
 * @notes	Console¿ØÖÆÌ¨µ÷ÊÔ
 * @author	Alopex/Helium
-* @version	v1.03a
+* @version	v1.04a
 * @date		2017-12-23	v1.00a	alopex	Create Project.
 * @date		2018-07-02	v1.02a	alopex	Add Common Header File.
 * @date		2018-07-03	v1.03a	alopex	Add Call Mode.
+* @date		2018-07-03	v1.04a	alopex	Update Common Header File.
 */
 #include "PlumConsole.h"
 
