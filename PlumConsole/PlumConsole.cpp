@@ -7,9 +7,10 @@
 * @brief	This Program is PlumConsole DLL Project.
 * @notes	Console¿ØÖÆÌ¨µ÷ÊÔ
 * @author	Alopex/Helium
-* @version	v1.02a
+* @version	v1.03a
 * @date		2017-12-23	v1.00a	alopex	Create Project.
 * @date		2018-07-02	v1.02a	alopex	Add Common Header File.
+* @date		2018-07-03	v1.03a	alopex	Add Call Mode.
 */
 #include "PlumConsole.h"
 
@@ -48,7 +49,7 @@ CPlumConsole::~CPlumConsole()
 // @Para: None
 // @Return: None
 //------------------------------------------------------------------
-HANDLE CPlumConsole::PlumConsoleGetHandle(void) const
+HANDLE PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleGetHandle(void) const
 {
 	return m_hConsole;
 }
@@ -60,7 +61,7 @@ HANDLE CPlumConsole::PlumConsoleGetHandle(void) const
 // @Para: None
 // @Return: None
 //------------------------------------------------------------------
-void CPlumConsole::PlumConsoleSetConsoleTitle(LPCWSTR lpcszTitle)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleSetConsoleTitle(LPCWSTR lpcszTitle)
 {
 	SetConsoleTitle(lpcszTitle);
 }
@@ -72,7 +73,7 @@ void CPlumConsole::PlumConsoleSetConsoleTitle(LPCWSTR lpcszTitle)
 // @Para: None
 // @Return: None
 //------------------------------------------------------------------
-void CPlumConsole::PlumConsoleSetCursorPosition(COORD Coord)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleSetCursorPosition(COORD Coord)
 {
 	SetConsoleCursorPosition(m_hConsole, Coord);
 }
@@ -84,7 +85,7 @@ void CPlumConsole::PlumConsoleSetCursorPosition(COORD Coord)
 // @Para: None
 // @Return: None
 //------------------------------------------------------------------
-void CPlumConsole::PlumConsoleGetScreenBufferInfo(void)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleGetScreenBufferInfo(void)
 {
 	GetConsoleScreenBufferInfo(m_hConsole, &m_sConsoleInfo);
 }
@@ -96,7 +97,7 @@ void CPlumConsole::PlumConsoleGetScreenBufferInfo(void)
 // @Para: None
 // @Return: None
 //------------------------------------------------------------------
-void CPlumConsole::PlumConsoleInit(LPCWSTR lpcszTitle)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleInit(LPCWSTR lpcszTitle)
 {
 	COORD Coord;
 	SMALL_RECT SmallRect;
@@ -127,7 +128,7 @@ void CPlumConsole::PlumConsoleInit(LPCWSTR lpcszTitle)
 // @Para: COORD Coord			//Console´°¿Ú»º³åÇø´óÐ¡
 // @Return: None
 //------------------------------------------------------------------
-void CPlumConsole::PlumConsoleInit(COORD Coord, LPCWSTR lpcszTitle)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleInit(COORD Coord, LPCWSTR lpcszTitle)
 {
 	SMALL_RECT SmallRect;
 
@@ -155,7 +156,7 @@ void CPlumConsole::PlumConsoleInit(COORD Coord, LPCWSTR lpcszTitle)
 // @Para: int nY			//Console×ø±êY
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleInit(int nWidth, int nHeight, LPCWSTR lpcszTitle)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleInit(int nWidth, int nHeight, LPCWSTR lpcszTitle)
 {
 	COORD Coord;
 	SMALL_RECT SmallRect;
@@ -186,7 +187,7 @@ void CPlumConsole::PlumConsoleInit(int nWidth, int nHeight, LPCWSTR lpcszTitle)
 // @Para: None
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleClear(void)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleClear(void)
 {
 	COORD StartPos;
 
@@ -204,7 +205,7 @@ void CPlumConsole::PlumConsoleClear(void)
 // @Para: int Y				//Çå¿ÕÒ»ÐÐ
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleClearLine(int Y)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleClearLine(int Y)
 {
 	COORD StartPos;
 
@@ -221,7 +222,7 @@ void CPlumConsole::PlumConsoleClearLine(int Y)
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWrite(const void* lpcszStr)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWrite(const void* lpcszStr)
 {
 	DWORD dwWriteCount;
 
@@ -236,7 +237,7 @@ void CPlumConsole::PlumConsoleWrite(const void* lpcszStr)
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWrite(const void* lpcszStr, int nSize)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWrite(const void* lpcszStr, int nSize)
 {
 	DWORD dwWriteCount;
 
@@ -251,7 +252,7 @@ void CPlumConsole::PlumConsoleWrite(const void* lpcszStr, int nSize)
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWrite(const void* lpcszStr, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWrite(const void* lpcszStr, WORD wTextColor, bool bIsUnderLine)
 {
 	DWORD dwWriteCount;
 
@@ -275,7 +276,7 @@ void CPlumConsole::PlumConsoleWrite(const void* lpcszStr, WORD wTextColor, bool 
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWrite(const void* lpcszStr, int nSize, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWrite(const void* lpcszStr, int nSize, WORD wTextColor, bool bIsUnderLine)
 {
 	DWORD dwWriteCount;
 
@@ -298,7 +299,7 @@ void CPlumConsole::PlumConsoleWrite(const void* lpcszStr, int nSize, WORD wTextC
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr)
 {
 	PlumConsoleWrite(lpcszStr);
 	PlumConsoleWrite("\n");
@@ -311,7 +312,7 @@ void CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr)
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr, int nSize)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr, int nSize)
 {
 	PlumConsoleWrite(lpcszStr, nSize);
 	PlumConsoleWrite("\n");
@@ -324,7 +325,7 @@ void CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr, int nSize)
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //---------------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr, WORD wTextColor, bool bIsUnderLine)
 {
 	PlumConsoleWrite(lpcszStr, wTextColor, bIsUnderLine);
 	PlumConsoleWrite("\n");
@@ -337,7 +338,7 @@ void CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr, WORD wTextColor, b
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //--------------------------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr, int nSize, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr, int nSize, WORD wTextColor, bool bIsUnderLine)
 {
 	PlumConsoleWrite(lpcszStr, nSize, wTextColor, bIsUnderLine);
 	PlumConsoleWrite("\n");
@@ -350,7 +351,7 @@ void CPlumConsole::PlumConsoleWriteLine(const void* lpcszStr, int nSize, WORD wT
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr)
 {
 	COORD Coord;
 
@@ -368,7 +369,7 @@ void CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr)
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //--------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr, int nSize)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr, int nSize)
 {
 	COORD Coord;
 
@@ -386,7 +387,7 @@ void CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr, int nS
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //---------------------------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr, WORD wTextColor, bool bIsUnderLine)
 {
 	COORD Coord;
 
@@ -404,7 +405,7 @@ void CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr, WORD w
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //--------------------------------------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr, int nSize, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr, int nSize, WORD wTextColor, bool bIsUnderLine)
 {
 	COORD Coord;
 
@@ -422,7 +423,7 @@ void CPlumConsole::PlumConsoleWriteEx(int X, int Y, const void* lpcszStr, int nS
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr)
 {
 	PlumConsoleWriteEx(X, Y, lpcszStr);
 	PlumConsoleWrite("\n");
@@ -435,7 +436,7 @@ void CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr)
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //--------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr, int nSize)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr, int nSize)
 {
 	PlumConsoleWriteEx(X, Y, lpcszStr, nSize);
 	PlumConsoleWrite("\n");
@@ -448,7 +449,7 @@ void CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr, in
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //---------------------------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr, WORD wTextColor, bool bIsUnderLine)
 {
 	PlumConsoleWriteEx(X, Y, lpcszStr, wTextColor, bIsUnderLine);
 	PlumConsoleWrite("\n");
@@ -461,7 +462,7 @@ void CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr, WO
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //--------------------------------------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr, int nSize, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr, int nSize, WORD wTextColor, bool bIsUnderLine)
 {
 	PlumConsoleWriteEx(X, Y, lpcszStr, nSize, wTextColor, bIsUnderLine);
 	PlumConsoleWrite("\n");
@@ -475,7 +476,7 @@ void CPlumConsole::PlumConsoleWriteLineEx(int X, int Y, const void* lpcszStr, in
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //-----------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteInt(int nNumber, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteInt(int nNumber, WORD wTextColor, bool bIsUnderLine)
 {
 	DWORD dwWriteCount;
 	char StrArr[10];
@@ -503,7 +504,7 @@ void CPlumConsole::PlumConsoleWriteInt(int nNumber, WORD wTextColor, bool bIsUnd
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //---------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteFloat(float fNumber, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteFloat(float fNumber, WORD wTextColor, bool bIsUnderLine)
 {
 	DWORD dwWriteCount;
 	char StrArr[20];
@@ -531,7 +532,7 @@ void CPlumConsole::PlumConsoleWriteFloat(float fNumber, WORD wTextColor, bool bI
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //---------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteDouble(double dNumber, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteDouble(double dNumber, WORD wTextColor, bool bIsUnderLine)
 {
 	DWORD dwWriteCount;
 	char StrArr[20];
@@ -559,7 +560,7 @@ void CPlumConsole::PlumConsoleWriteDouble(double dNumber, WORD wTextColor, bool 
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //-----------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLineInt(int nNumber, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLineInt(int nNumber, WORD wTextColor, bool bIsUnderLine)
 {
 	PlumConsoleWriteInt(nNumber, wTextColor, bIsUnderLine);
 	PlumConsoleWrite("\n");
@@ -573,7 +574,7 @@ void CPlumConsole::PlumConsoleWriteLineInt(int nNumber, WORD wTextColor, bool bI
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //---------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLineFloat(float fNumber, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLineFloat(float fNumber, WORD wTextColor, bool bIsUnderLine)
 {
 	PlumConsoleWriteFloat(fNumber, wTextColor, bIsUnderLine);
 	PlumConsoleWrite("\n");
@@ -587,7 +588,7 @@ void CPlumConsole::PlumConsoleWriteLineFloat(float fNumber, WORD wTextColor, boo
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //---------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLineDouble(double dNumber, WORD wTextColor, bool bIsUnderLine)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLineDouble(double dNumber, WORD wTextColor, bool bIsUnderLine)
 {
 	PlumConsoleWriteDouble(dNumber, wTextColor, bIsUnderLine);
 	PlumConsoleWrite("\n");
@@ -601,7 +602,7 @@ void CPlumConsole::PlumConsoleWriteLineDouble(double dNumber, WORD wTextColor, b
 // @Para: ...
 // @Return: None
 //---------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteNormal(LPCSTR lpcstr, ...)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteNormal(LPCSTR lpcstr, ...)
 {
 	va_list arg_ptr;
 	char WriteArr[MAX_PATH];
@@ -623,7 +624,7 @@ void CPlumConsole::PlumConsoleWriteNormal(LPCSTR lpcstr, ...)
 // @Para: ...
 // @Return: None
 //---------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLineNormal(LPCSTR lpcstr, ...)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLineNormal(LPCSTR lpcstr, ...)
 {
 	va_list arg_ptr;
 	char WriteArr[MAX_PATH];
@@ -646,7 +647,7 @@ void CPlumConsole::PlumConsoleWriteLineNormal(LPCSTR lpcstr, ...)
 // @Para: ...
 // @Return: None
 //---------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteRepeat(int Y, LPCSTR lpcstr, ...)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteRepeat(int Y, LPCSTR lpcstr, ...)
 {
 	va_list arg_ptr;
 	char WriteArr[MAX_PATH];
@@ -675,7 +676,7 @@ void CPlumConsole::PlumConsoleWriteRepeat(int Y, LPCSTR lpcstr, ...)
 // @Para: ...
 // @Return: None
 //---------------------------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteLineRepeat(int Y, LPCSTR lpcstr, ...)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteLineRepeat(int Y, LPCSTR lpcstr, ...)
 {
 	va_list arg_ptr;
 	char WriteArr[MAX_PATH];
@@ -704,7 +705,7 @@ void CPlumConsole::PlumConsoleWriteLineRepeat(int Y, LPCSTR lpcstr, ...)
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteA(const void* lpcszStr)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteA(const void* lpcszStr)
 {
 	DWORD dwWriteCount;
 
@@ -719,7 +720,7 @@ void CPlumConsole::PlumConsoleWriteA(const void* lpcszStr)
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteA(const void* lpcszStr, int nSize)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteA(const void* lpcszStr, int nSize)
 {
 	DWORD dwWriteCount;
 
@@ -733,7 +734,7 @@ void CPlumConsole::PlumConsoleWriteA(const void* lpcszStr, int nSize)
 // @Para: const void* lpcszStr			//×Ö·û´®µØÖ·
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteW(const void* lpcszStr)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteW(const void* lpcszStr)
 {
 	DWORD dwWriteCount;
 
@@ -748,7 +749,7 @@ void CPlumConsole::PlumConsoleWriteW(const void* lpcszStr)
 // @Para: int nSize						//×Ö·û´®³¤¶È
 // @Return: None
 //-----------------------------------------------------------------------
-void CPlumConsole::PlumConsoleWriteW(const void* lpcszStr, int nSize)
+void PLUMCONSOLE_CALLMODE CPlumConsole::PlumConsoleWriteW(const void* lpcszStr, int nSize)
 {
 	DWORD dwWriteCount;
 
